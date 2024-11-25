@@ -1,28 +1,39 @@
 import pytest
-# TODO: add necessary import
+from sklearn.ensemble import RandomForestClassifier
+from train_model import X_train, y_train
+from ml.model import compute_model_metrics, train_model
+    
+    
 
-# TODO: implement the first test. Change the function name and input as needed
-def test_one():
+def test_compute_model_metrics():
     """
-    # add description for the first test
+    Tests to ensure the compute_model_metrics function returns expected types
     """
-    # Your code here
-    pass
+    
+    y_true = [0, 1, 1, 0, 1]
+    y_pred = [0, 1, 0, 0, 1]
+    
+    
+    precision, recall, f1 = compute_model_metrics(y_true, y_pred)
+    
+    
+    assert isinstance(precision, float)
+    assert isinstance(recall, float)
+    assert isinstance(f1, float)
+    
 
 
-# TODO: implement the second test. Change the function name and input as needed
-def test_two():
+def test_model_trains_successfully():
     """
-    # add description for the second test
+    Tests the train_model function to ensure it trains a model successfully
     """
-    # Your code here
-    pass
+    model = train_model(X_train, y_train)
+    assert hasattr(model, 'n_features_in_'), "Model has not been trained (fitted)."
 
-
-# TODO: implement the third test. Change the function name and input as needed
-def test_three():
+def test_model_uses_expected_algorithm():
     """
-    # add description for the third test
+    Tests the train_model function to ensure it uses the proper algorithm
     """
-    # Your code here
-    pass
+    model = train_model(X_train, y_train)
+    
+    assert isinstance(model, RandomForestClassifier), "Expected model to be a RandomForestClassifier"
