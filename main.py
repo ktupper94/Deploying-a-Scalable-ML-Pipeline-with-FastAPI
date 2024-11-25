@@ -32,11 +32,11 @@ encoder = load_model(path)
 path = "/home/keton/Deploying-a-Scalable-ML-Pipeline-with-FastAPI/model/model.pkl"
 model = load_model(path)
 
-# TODO: create a RESTful API using FastAPI
+# create a RESTful API using FastAPI
 app = FastAPI()
 
 
-# TODO: create a GET on the root giving a welcome message
+# create a GET on the root giving a welcome message
 @app.get("/")
 async def get_root():
     """ Say hello!"""
@@ -45,7 +45,7 @@ async def get_root():
     
 
 
-# TODO: create a POST on a different path that does model inference
+# create a POST on a different path that does model inference
 @app.post("/data/")
 async def post_inference(data: Data):
     # DO NOT MODIFY: turn the Pydantic model into a dict.
