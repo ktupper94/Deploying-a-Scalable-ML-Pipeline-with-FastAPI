@@ -82,16 +82,12 @@ def save_model(model, path):
         Path to save pickle file.
     """
     # Open file in write binary mode and pickle the model
-    with open(path, 'wb') as file:
-        pickle.dump(model, file)
-    
+    pickle.dump(model,open(path, "ab"))
 
 def load_model(path):
     """ Loads pickle file from `path` and returns it."""
     # Open model
-    with open(path, 'rb') as file:
-        model = pickle.load(file)
-    return model 
+    pickle.load(open(path,"rb"))
     
 
 
@@ -133,7 +129,7 @@ def performance_on_categorical_slice(
     """
     # implement the function
     X_slice, y_slice, _, _ = process_data(
-        data[data[column_name] == slice_value],
+        data = data[data[column_name] == slice_value],
         categorical_features=categorical_features,
         label=label,
         encoder=encoder,

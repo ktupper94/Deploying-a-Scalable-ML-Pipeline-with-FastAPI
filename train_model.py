@@ -22,6 +22,7 @@ data = pd.read_csv(data_path)
 
 train, test = train_test_split(data, test_size=0.2)
 
+
 # DO NOT MODIFY
 cat_features = [
     "workclass",
@@ -66,7 +67,7 @@ model = load_model(
 ) 
 
 #  use the inference function to run the model inferences on the test dataset.
-preds = inference(model, test)
+preds = inference(model, X_test)
 
 # Calculate and print the metrics
 p, r, fb = compute_model_metrics(y_test, preds)
@@ -79,9 +80,14 @@ for col in cat_features:
     for slicevalue in sorted(test[col].unique()):
         count = test[test[col] == slicevalue].shape[0]
         p, r, fb = performance_on_categorical_slice(
-            data = test,
-            categorical_features = col,
-            slicevalue = slicevalue
+            test,
+            col,
+            slicevalue,
+            cat_features,
+            "salary",
+            encoder,
+            lb,
+            model
             
         )
         with open("slice_output.txt", "a") as f:
